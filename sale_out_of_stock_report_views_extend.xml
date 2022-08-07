@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_sale_out_stock_report_list_extend" model="ir.ui.view">
+         <field name="name">visiontrack.sale.out.stock.report.list.extend</field>
+         <field name="model">visiontrack.sale_out_stock_report_extend</field>
+         <field name="arch" type="xml">
+             <tree create="0" delete="0">
+                 <!-- <field name="name" optional="show"/> -->
+                <field name="partner_id" invisible="0"/>
+                <field name="currency_id" invisible="0"/>
+                <field name="amount_untaxed" optional="show" widget="monetary"/>
+                <field name="warehouse_id" optional="show"/>
+             </tree>
+         </field>
+    </record>
+
+    <record id="view_sale_out_stock_report_form_extend" model="ir.ui.view">
+        <field name="name">visiontrack.sale.out.stock.report.form.extend</field>
+        <field name="model">visiontrack.sale_out_stock_report_extend</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0">
+                <sheet>
+                    <field name="partner_id" invisible="0"/>
+                    <field name="currency_id" invisible="0"/>
+                    <group name="sale" string="Sale Order">
+                        <!-- <field name="name"/> -->
+                        <field name="amount_untaxed" widget="monetary"/>
+                    </group>
+                    <group name="warehouse" string="Warehouse">
+                        <field name="warehouse_id"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- <record id="view_sale_out_stock_report_search_extend" model="ir.ui.view">
+        <field name="name">visiontrack.sale_out_stock_report.search_extend</field>
+        <field name="model">visiontrack.sale_out_stock_report_extend</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="sale_id"/>
+                <field name="warehouse_id"/>
+                <separator/>
+                <group expand="1" string="Group By">
+                    <filter string="Warehouse" name="warehouse_group" context="{'group_by':'warehouse_id'}"/>
+                    <filter string="Order No" name="sales_channel" context="{'group_by':'sale_id'}"/>
+            </search>
+        </field>
+    </record> -->
+
+    <record id="action_open_sale_out_stock_report_view_extend" model="ir.actions.act_window">
+        <field name="name">Sale Out of Stock Report Extend</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">visiontrack.sale_out_stock_report_extend</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_open_vt_sale_out_stock_report_extend"
+              name="Sale Out of Stock Report Extension"
+              parent="stock.menu_warehouse_report"
+              sequence="1000"
+              action="action_open_sale_out_stock_report_view_extend" />
+</odoo>
